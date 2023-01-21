@@ -5,13 +5,12 @@ from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.fundamentaldata import FundamentalData
 
 
-
-class GetData():
+class GetData:
     def __init__(self, ticker: str) -> None:
         self.ticker = ticker
         self.api = open("AVAPI.txt", "r").readlines()[0]
 
-        if self.ticker[-3:] != 'LON':
+        if self.ticker[-3:] != "LON":
             raise ValueError(
                 "Tickers for LSE should end in .LON - "
                 "are you sure the entered ticker is correct?"
@@ -30,7 +29,7 @@ class GetData():
 
     def download(self):
         ts = TimeSeries(self.api, output_format="pandas")
-        data, meta_data = ts.get_daily(self.ticker, outputsize='full')
+        data, meta_data = ts.get_daily(self.ticker, outputsize="full")
         data.to_csv(self.path())
 
     def load(self):
@@ -38,19 +37,11 @@ class GetData():
         return df
 
 
-class get_fundamentals():
+class get_fundamentals:
     def __init__(self, ticker: str) -> None:
         self.ticker = ticker
         self.api = open("AVAPI.txt", "r").readlines()[0]
 
-        # if self.ticker[-3:] != 'LON':
-        #     raise ValueError(
-        #         "Tickers for LSE should end in .LON - "
-        #         "are you sure the entered ticker is correct?"
-        #     )
-
     @classmethod
     def eps(self):
         FundamentalData.get_company_overview(self.ticker)
-
-# print(get_fundamentals('MSFT').eps)
