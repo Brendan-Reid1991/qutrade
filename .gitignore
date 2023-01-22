@@ -1,5 +1,6 @@
 *.DS_Store
 key.txt
+*key*
 *.pyc
 
 .vscode/
