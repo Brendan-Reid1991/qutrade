@@ -4,11 +4,13 @@ import os
 from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.fundamentaldata import FundamentalData
 
+from qutrade.types import api
+
 
 class GetData:
     def __init__(self, ticker: str) -> None:
         self.ticker = ticker
-        self.api = open("AVAPI.txt", "r").readlines()[0]
+        self.api = api()
 
         if self.ticker[-3:] != "LON":
             raise ValueError(
@@ -29,7 +31,7 @@ class GetData:
 
     def download(self):
         ts = TimeSeries(self.api, output_format="pandas")
-        data, meta_data = ts.get_daily(self.ticker, outputsize="full")
+        data, meta_data = ts.get_daily_adjusted(self.ticker, outputsize="full")
         data.to_csv(self.path())
 
     def load(self):
@@ -45,3 +47,7 @@ class get_fundamentals:
     @classmethod
     def eps(self):
         FundamentalData.get_company_overview(self.ticker)
+
+
+if __name__ == "__main__":
+    GetData("DDDD.LON").download()
