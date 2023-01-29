@@ -110,18 +110,13 @@ class Inspect:
 
         return data
 
-    def weekly(
-        self, adjusted: bool = True, output: str = "full", save: bool = False
-    ) -> pd.DataFrame:
+    def weekly(self, adjusted: bool = True, save: bool = False) -> pd.DataFrame:
         """Get the weekly data and save it to a CSV file.
 
         Parameters
         ----------
         adjusted : bool, optional
             Whether or not to access the adjusted daily data.
-        output : str, optional
-            How much data to take, accepted values are 'compact' or 'full'.
-            By default None
         save : bool, optional
             Whether or not to save the data to a CSV, by default False.
 
@@ -133,33 +128,21 @@ class Inspect:
         Warning
             If the output type is not one of 'compact' or 'full', defaults to 'full'.
         """
-        output = "full" if output is None else output
-        if output not in ["compact", "full"]:
-            output_warning(output)
-            output = "full"
-
         if adjusted:
-            data, metadata = self._time_series.get_weekly_adjusted(
-                self.ticker, outputsize=output
-            )
+            data, metadata = self._time_series.get_weekly_adjusted(self.ticker)
         else:
-            data, metadata = self._time_series.get_weekly(
-                self.ticker, outputsize=output
-            )
+            data, metadata = self._time_series.get_weekly(self.ticker)
         data = data.reset_index()
         suffix = "" if not adjusted else "Adjusted"
         data.to_csv(self.pathway + f"/{self.ticker}_Weekly{suffix}", index=False)
 
-    def monthly(self, adjusted: bool = True, output: str = "full", save: bool = False):
+    def monthly(self, adjusted: bool = True, save: bool = False):
         """Get the monthly data and save it to a CSV file.
 
         Parameters
         ----------
         adjusted : bool, optional
             Whether or not to access the adjusted daily data.
-        output : str, optional
-            How much data to take, accepted values are 'compact' or 'full'.
-            By default None
 
         Raises
         ------
@@ -169,19 +152,11 @@ class Inspect:
         Warning
             If the output type is not one of 'compact' or 'full', defaults to 'full'.
         """
-        output = "full" if output is None else output
-        if output not in ["compact", "full"]:
-            output_warning(output)
-            output = "full"
 
         if adjusted:
-            data, metadata = self._time_series.get_monthly_adjusted(
-                self.ticker, outputsize=output
-            )
+            data, metadata = self._time_series.get_monthly_adjusted(self.ticker)
         else:
-            data, metadata = self._time_series.get_monthly(
-                self.ticker, outputsize=output
-            )
+            data, metadata = self._time_series.get_monthly(self.ticker)
         data = data.reset_index()
         suffix = "" if not adjusted else "Adjusted"
         data.to_csv(self.pathway + f"/{self.ticker}_Monthly{suffix}", index=False)
