@@ -1,6 +1,8 @@
 from qutrade.investigate import Inspect
 from qutrade.types import Ticker
 
-fourd_pharma = Inspect(Ticker("IBM"))
+ibm = Inspect(Ticker("IBM"))
 
-fourd_pharma.intraday()
+data = ibm.intraday(save=True)
+
+# print(data.index.get_level_values("date"))
