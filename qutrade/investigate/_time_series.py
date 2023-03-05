@@ -17,7 +17,7 @@ def output_warning(arg: str):
     )
 
 
-class Inspect:
+class TimeSeries:
     def __init__(self, ticker: Ticker):
         self.ticker = ticker
         self.pathway = f"data/{self.ticker}/"

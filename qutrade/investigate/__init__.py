@@ -1,1 +1,1 @@
-from qutrade.investigate._inspector import Inspect
+from qutrade.investigate._time_series import TimeSeries

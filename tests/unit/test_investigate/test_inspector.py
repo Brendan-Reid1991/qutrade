@@ -3,8 +3,8 @@ import warnings
 
 import pandas as pd
 
-from qutrade.investigate._inspector import output_warning
-from qutrade.investigate import Inspect
+from qutrade.investigate._TimeSeriesor import output_warning
+from qutrade.investigate import TimeSeries
 from qutrade.types import Ticker
 
 
@@ -17,17 +17,17 @@ def test_output_warning(arg):
         output_warning(arg)
 
 
-class TestInspect:
+class TestTimeSeries:
     @pytest.mark.parametrize("ticker", ["IBM", "GOOG", "MSFT"])
     def test_init(self, ticker):
         ticker = Ticker(ticker)
-        inspect = Inspect(ticker)
-        assert inspect.ticker == ticker
-        assert inspect.pathway == f"data/{ticker}/"
+        TimeSeries = TimeSeries(ticker)
+        assert TimeSeries.ticker == ticker
+        assert TimeSeries.pathway == f"data/{ticker}/"
 
     @pytest.fixture(scope="class")
     def IBM(self):
-        return Inspect(Ticker("IBM"))
+        return TimeSeries(Ticker("IBM"))
 
     def test_intraday_return_type(self, IBM):
         assert isinstance(IBM.intraday(), pd.DataFrame)
