@@ -17,7 +17,7 @@ def output_warning(arg: str):
     )
 
 
-class TimeSeries:
+class DataHandler:
     def __init__(self, ticker: Ticker):
         self.ticker = ticker
         self.pathway = f"data/{self.ticker}/"
@@ -62,7 +62,7 @@ class TimeSeries:
         data, _ = self._time_series.get_intraday(self.ticker, outputsize=output)
         data = data.reset_index()
         if save:
-            data.to_csv(self.pathway + f"/{self.ticker}_Intraday.csv", index=False)
+            data.to_csv(self.pathway + f"/{self.ticker}_Intraday", index=False)
 
         return data
 

@@ -1,1 +1,1 @@
-from qutrade.investigate._time_series import TimeSeries
+from qutrade.investigate._data_handler import DataHandler

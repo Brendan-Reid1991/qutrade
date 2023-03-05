@@ -1,7 +1,7 @@
-from qutrade.investigate import TimeSeries
+from qutrade.investigate import DataHandler
 from qutrade.types import Ticker
 
-ibm = TimeSeries(Ticker("IBM"))
+ibm = DataHandler(Ticker("IBM"))
 
 data = ibm.intraday(save=True)
 
