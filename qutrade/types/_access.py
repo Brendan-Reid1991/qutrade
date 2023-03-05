@@ -20,4 +20,4 @@ def api(path: Optional[Path] = None) -> str:
     """
     if path is None:
         return open("key.txt", "r").read().strip()
-    return open(path, "r").read().strip()
+    return open(path, "rb").read().strip()
