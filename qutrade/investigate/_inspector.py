@@ -20,7 +20,7 @@ def output_warning(arg: str):
 class Inspect:
     def __init__(self, ticker: Ticker):
         self.ticker = ticker
-        self.pathway = f"qutrade/data/{self.ticker}/"
+        self.pathway = f"data/{self.ticker}/"
         self._time_series = TimeSeries(ACCESS_KEY, output_format="pandas")
         if not os.path.exists(self.pathway):
             os.makedirs(self.pathway)

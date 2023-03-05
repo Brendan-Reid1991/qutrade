@@ -23,7 +23,7 @@ class TestInspect:
         ticker = Ticker(ticker)
         inspect = Inspect(ticker)
         assert inspect.ticker == ticker
-        assert inspect.pathway == f"qutrade/data/{ticker}/"
+        assert inspect.pathway == f"data/{ticker}/"
 
     @pytest.fixture(scope="class")
     def IBM(self):
