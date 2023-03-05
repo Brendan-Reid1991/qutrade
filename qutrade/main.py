@@ -1,3 +1,5 @@
+##### MARKED FOR DELETION
+
 from get_data import GetData
 from get_info import GetInfo
 from scoring import Score
@@ -6,7 +8,7 @@ import os
 str = "SUR.LON"
 
 
-class StockChecker():
+class StockChecker:
     def __init__(self, index: str):
         self.index = index
         data = GetData(self.index)
@@ -27,14 +29,18 @@ class StockChecker():
         if show_all:
             return GetInfo(self.index).rolling_average(range=days)
         else:
-            return (f"Rolling {days} day average is"
-                    f" {GetInfo(self.index).rolling_average(range=days)[-1]:.2f}")
+            return (
+                f"Rolling {days} day average is"
+                f" {GetInfo(self.index).rolling_average(range=days)[-1]:.2f}"
+            )
 
     @property
     def key_info(self):
         for days in [50, 200]:
-            print(f"Rolling {days} day average is"
-                    f" {GetInfo(self.index).rolling_average(range=days)[-1]:.2f}")
+            print(
+                f"Rolling {days} day average is"
+                f" {GetInfo(self.index).rolling_average(range=days)[-1]:.2f}"
+            )
         print(f"Score is {self.score} out of 6")
 
 
