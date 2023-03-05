@@ -129,12 +129,14 @@ class Inspect:
             If the output type is not one of 'compact' or 'full', defaults to 'full'.
         """
         if adjusted:
-            data, metadata = self._time_series.get_weekly_adjusted(self.ticker)
+            data, _ = self._time_series.get_weekly_adjusted(self.ticker)
         else:
-            data, metadata = self._time_series.get_weekly(self.ticker)
+            data, _ = self._time_series.get_weekly(self.ticker)
         data = data.reset_index()
         suffix = "" if not adjusted else "Adjusted"
         data.to_csv(self.pathway + f"/{self.ticker}_Weekly{suffix}", index=False)
+
+        return data
 
     def monthly(self, adjusted: bool = True, save: bool = False):
         """Get the monthly data and save it to a CSV file.
@@ -154,9 +156,11 @@ class Inspect:
         """
 
         if adjusted:
-            data, metadata = self._time_series.get_monthly_adjusted(self.ticker)
+            data, _ = self._time_series.get_monthly_adjusted(self.ticker)
         else:
-            data, metadata = self._time_series.get_monthly(self.ticker)
+            data, _ = self._time_series.get_monthly(self.ticker)
         data = data.reset_index()
         suffix = "" if not adjusted else "Adjusted"
         data.to_csv(self.pathway + f"/{self.ticker}_Monthly{suffix}", index=False)
+
+        return data
